@@ -106,7 +106,7 @@
 
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
-                    $type = ($row['salary_type'] == 'salary_only') ? 'أساسي' : 'بونص';
+                    $type = ($row['salary_type'] == 'salary_only') ? 'أساسي' : 'راتب+بونص';
                     echo "<tr>
                             <td>$sn</td>
                             <td>
