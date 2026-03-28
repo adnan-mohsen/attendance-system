@@ -57,6 +57,7 @@
 
 <nav>
     <a href="employees.php">👥 إدارة الموظفين</a>
+    <a href="manage_branches.php">🏢 إدارة الفروع</a>
     <a href="take_attendance.php">📝 تسجيل الحضور</a>
     <a href="view_attendance.php">📊 التقارير العامة</a>
 </nav>
