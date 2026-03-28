@@ -1,3 +1,11 @@
+<thead>
+    <tr>
+        <th>#</th> <th>الاسم</th>
+        <th>نظام الراتب</th>
+        <th>الفرع الحالي</th>
+        <th>الإجراءات</th>
+    </tr>
+</thead>
 <?php include 'db_config.php'; ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
