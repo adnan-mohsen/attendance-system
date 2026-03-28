@@ -76,29 +76,29 @@
     }
     ?>
 </tbody>
-        <tbody>
-            <?php
-            // جلب البيانات مع اسم الفرع
-            $query = "SELECT employees.*, branches.branch_name 
-                      FROM employees 
-                      LEFT JOIN branches ON employees.branch_id = branches.id";
-            $result = mysqli_query($conn, $query);
+ <tbody>
+    <?php
+    $query = "SELECT employees.*, branches.branch_name 
+              FROM employees 
+              LEFT JOIN branches ON employees.branch_id = branches.id";
+    $result = mysqli_query($conn, $query);
 
-            if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
-                    $type = ($row['salary_type'] == 'salary_only') ? 'أساسي' : 'بونص';
-                    echo "<tr>
-                            <td>{$row['name']}</td>
-                            <td>$type</td>
-                            <td>" . ($row['branch_name'] ?? 'غير محدد') . "</td>
-                            <td><button class='btn btn-transfer'>نقل لفرع آخر</button></td>
-                          </tr>";
-                }
-            } else {
-                echo "<tr><td colspan='4'>لا يوجد موظفين حالياً. أضف موظفك الأول!</td></tr>";
-            }
-            ?>
-        </tbody>
+    $sn = 1;
+
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $type = ($row['salary_type'] == 'salary_only') ? 'أساسي' : 'بونص';
+            echo "<tr>
+                    <td>$sn</td> <td>{$row['name']}</td> <td>$type</td> <td>" . ($row['branch_name'] ?? 'غير محدد') . "</td> <td>
+                        <a href='transfer_employee.php?id={$row['id']}' class='btn btn-transfer'>نقل لفرع آخر</a>
+                    </td> </tr>";
+            $sn++;
+        }
+    } else {
+        echo "<tr><td colspan='5'>لا يوجد موظفين حالياً.</td></tr>";
+    }
+    ?>
+</tbody>
     </table>
 
 </body>
