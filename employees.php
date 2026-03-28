@@ -61,16 +61,16 @@
     $sn = 1; // تعريف العداد ليبدأ من رقم 1
 
     if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)) {
-            $type = ($row['salary_type'] == 'salary_only') ? 'أساسي' : 'بونص';
-            echo "<tr>
-                    <td>$sn</td> <td>{$row['name']}</td>
-                    <td>$type</td>
-                    <td>" . ($row['branch_name'] ?? 'غير محدد') . "</td>
-                    <td><button class='btn btn-transfer'>نقل لفرع آخر</button></td>
-                  </tr>";
-            $sn++; // زيادة الرقم تلقائياً للصف التالي
-        }
+       while($row = mysqli_fetch_assoc($result)) {
+    $type = ($row['salary_type'] == 'salary_only') ? 'أساسي' : 'بونص';
+    echo "<tr>
+            <td>$sn</td> <td>{$row['name']}</td>
+            <td>$type</td>
+            <td>" . ($row['branch_name'] ?? 'غير محدد') . "</td>
+            <td><button class='btn btn-transfer'>نقل لفرع آخر</button></td>
+          </tr>";
+    $sn++;
+}
     } else {
         echo "<tr><td colspan='5'>لا يوجد موظفين حالياً.</td></tr>";
     }
