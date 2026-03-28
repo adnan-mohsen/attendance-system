@@ -76,20 +76,21 @@
     }
     ?>
 </tbody>
- <tbody>
+<tbody>
     <?php
+    // جلب البيانات مع الربط بجدول الفروع
     $query = "SELECT employees.*, branches.branch_name 
               FROM employees 
               LEFT JOIN branches ON employees.branch_id = branches.id";
     $result = mysqli_query($conn, $query);
 
-    $sn = 1;
+    $sn = 1; // العداد
 
     if (mysqli_num_rows($result) > 0) {
         while($row = mysqli_fetch_assoc($result)) {
             $type = ($row['salary_type'] == 'salary_only') ? 'أساسي' : 'بونص';
             echo "<tr>
-                    <td>$sn</td> <td>{$row['name']}</td> <td>$type</td> <td>" . ($row['branch_name'] ?? 'غير محدد') . "</td> <td>
+                    <td>$sn</td> <td>{$row['name']}</td> <td>$type</td> <td>" . ($row['branch_name'] ?? 'الفرع الرئيسي') . "</td> <td>
                         <a href='transfer_employee.php?id={$row['id']}' class='btn btn-transfer'>نقل لفرع آخر</a>
                     </td> </tr>";
             $sn++;
