@@ -1,4 +1,3 @@
-<?php include 'check_login.php'; ?>
 <div style="text-align: left; margin-bottom: 10px;">
     <button onclick="window.print()" class="btn-filter" style="background-color: #28a745;">🖨️ طباعة التقرير (PDF)</button>
 </div>
