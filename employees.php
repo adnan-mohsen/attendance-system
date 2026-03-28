@@ -1,3 +1,4 @@
+<?php include 'check_login.php'; ?>
 <div style="text-align: center; margin-bottom: 20px;">
     <a href="take_attendance.php" class="btn" style="background-color: #28a745;">📝 تسجيل حضور اليوم</a>
     <a href="view_attendance.php" class="btn" style="background-color: #6f42c1;">📊 عرض التقارير</a>
