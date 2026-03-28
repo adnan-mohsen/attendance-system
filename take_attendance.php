@@ -1,3 +1,8 @@
+<nav style="background: #343a40; padding: 15px; text-align: center; border-radius: 8px; margin-bottom: 20px;">
+    <a href="employees.php" style="color: white; text-decoration: none; margin: 0 15px; font-weight: bold;">👥 الموظفين</a>
+    <a href="take_attendance.php" style="color: white; text-decoration: none; margin: 0 15px; font-weight: bold;">📝 تسجيل الحضور</a>
+    <a href="view_attendance.php" style="color: white; text-decoration: none; margin: 0 15px; font-weight: bold;">📊 التقارير</a>
+</nav>
 <?php include 'db_config.php'; ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
