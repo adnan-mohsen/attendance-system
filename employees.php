@@ -1,51 +1,72 @@
-<nav style="background: #343a40; padding: 15px; text-align: center; border-radius: 8px; margin-bottom: 20px;">
-    <a href="employees.php" style="color: white; text-decoration: none; margin: 0 15px; font-weight: bold;">👥 الموظفين</a>
-    <a href="take_attendance.php" style="color: white; text-decoration: none; margin: 0 15px; font-weight: bold;">📝 تسجيل الحضور</a>
-    <a href="view_attendance.php" style="color: white; text-decoration: none; margin: 0 15px; font-weight: bold;">📊 التقارير</a>
-</nav>
-<?php include 'check_login.php'; ?>
-<div style="text-align: center; margin-bottom: 20px;">
-    <a href="take_attendance.php" class="btn" style="background-color: #28a745;">📝 تسجيل حضور اليوم</a>
-    <a href="view_attendance.php" class="btn" style="background-color: #6f42c1;">📊 عرض التقارير</a>
-</div>
 <?php include 'db_config.php'; ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>نظام إدارة الموظفين</title>
+    <title>نظام إدارة الموظفين المتكامل</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background-color: #f8f9fa; text-align: right; }
-        .container { max-width: 1000px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        h2 { text-align: center; color: #333; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; background-color: #f4f7f6; text-align: right; }
         
+        /* شريط التنقل العلوي */
+        nav { background: #343a40; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; font-size: 16px; }
+        nav a:hover { color: #ffc107; }
+
+        .container { max-width: 1100px; margin: 30px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        h2 { text-align: center; color: #333; margin-bottom: 30px; }
+
         /* تنسيق النموذج */
-        .form-container { background: #e9ecef; padding: 20px; border-radius: 8px; margin-bottom: 20px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-        input, select { padding: 10px; border: 1px solid #ccc; border-radius: 5px; font-size: 14px; }
-        
-        /* تنسيق الجدول */
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        th, td { border: 1px solid #dee2e6; padding: 12px; text-align: center; }
-        th { background-color: #007bff; color: white; }
-        tr:nth-child(even) { background-color: #f2f2f2; }
-        
-        /* الأزرار */
-        .btn { padding: 8px 15px; border: none; border-radius: 5px; cursor: pointer; color: white; text-decoration: none; font-size: 14px; display: inline-block; }
-        .btn-add { background-color: #28a745; font-weight: bold; }
-        .btn-add:hover { background-color: #218838; }
-        .btn-transfer { background-color: #17a2b8; margin-left: 5px; }
+        .form-container { background: #f8f9fa; padding: 25px; border-radius: 12px; border: 1px solid #e9ecef; margin-bottom: 30px; }
+        input, select { padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 14px; outline: none; }
+        input:focus { border-color: #007bff; }
+
+        /* الجدول */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; border-radius: 10px; overflow: hidden; }
+        th { background-color: #007bff; color: white; padding: 15px; font-size: 15px; }
+        td { padding: 15px; border-bottom: 1px solid #eee; text-align: center; color: #555; }
+        tr:hover { background-color: #fcfcfc; }
+
+        /* --- الهدية الختامية: تنسيق الأزرار العصري --- */
+        .btn { 
+            padding: 8px 18px; 
+            border: none; 
+            border-radius: 6px; 
+            cursor: pointer; 
+            color: white; 
+            text-decoration: none; 
+            font-size: 13px; 
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.3s ease; /* تأثير النعومة */
+        }
+        .btn:hover { 
+            transform: translateY(-3px); /* رفعة بسيطة عند التمرير */
+            box-shadow: 0 5px 12px rgba(0,0,0,0.15); 
+        }
+        .btn-add { background-color: #28a745; padding: 12px 25px; }
+        .btn-edit { background-color: #ffc107; color: #212529; }
+        .btn-transfer { background-color: #17a2b8; }
         .btn-delete { background-color: #dc3545; }
-        .btn-delete:hover { background-color: #c82333; }
+
+        /* رابط الملف الشخصي */
+        .emp-name { color: #007bff; text-decoration: none; font-weight: bold; }
+        .emp-name:hover { text-decoration: underline; color: #0056b3; }
     </style>
 </head>
 <body>
 
+<nav>
+    <a href="employees.php">👥 إدارة الموظفين</a>
+    <a href="take_attendance.php">📝 تسجيل الحضور</a>
+    <a href="view_attendance.php">📊 التقارير العامة</a>
+</nav>
+
 <div class="container">
-    <h2>إدارة الموظفين</h2>
+    <h2>إدارة طاقم العمل</h2>
 
     <div class="form-container">
-        <form action="save_employee.php" method="POST" style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <input type="text" name="name" placeholder="اسم الموظف الجديد" required style="width: 250px;">
+        <form action="save_employee.php" method="POST" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+            <input type="text" name="name" placeholder="اسم الموظف الثلاثي" required style="flex: 1; min-width: 200px;">
             
             <select name="salary_type">
                 <option value="salary_only">راتب أساسي</option>
@@ -62,7 +83,7 @@
                 ?>
             </select>
 
-            <button type="submit" class="btn btn-add">إضافة موظف الآن</button>
+            <button type="submit" class="btn btn-add">➕ إضافة للأنظمة</button>
         </form>
     </div>
 
@@ -70,40 +91,43 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>الاسم</th>
+                <th>اسم الموظف (اضغط للملف)</th>
                 <th>نظام الراتب</th>
-                <th>الفرع الحالي</th>
-                <th>الإجراءات</th>
+                <th>الفرع</th>
+                <th>إدارة البيانات</th>
             </tr>
         </thead>
         <tbody>
             <?php
-            // استعلام جلب الموظفين مع اسم الفرع
             $query = "SELECT employees.*, branches.branch_name 
                       FROM employees 
                       LEFT JOIN branches ON employees.branch_id = branches.id 
                       ORDER BY employees.id DESC";
             $result = mysqli_query($conn, $query);
-
-            $sn = 1; // عداد التسلسل الرقمي
+            $sn = 1;
 
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)) {
                     $type = ($row['salary_type'] == 'salary_only') ? 'أساسي' : 'بونص';
                     echo "<tr>
                             <td>$sn</td>
-                            <td>{$row['name']}</td>
-                            <td>$type</td>
-                            <td>" . ($row['branch_name'] ?? 'غير محدد') . "</td>
                             <td>
-                                <a href='transfer_employee.php?id={$row['id']}' class='btn btn-transfer'>نقل فرع</a>
-                                <a href='delete_employee.php?id={$row['id']}' class='btn btn-delete' onclick='return confirm(\"هل أنت متأكد من حذف الموظف {$row['name']}؟\")'>حذف</a>
+                                <a href='employee_profile.php?id={$row['id']}' class='emp-name'>
+                                    {$row['name']}
+                                </a>
+                            </td>
+                            <td>$type</td>
+                            <td>" . ($row['branch_name'] ?? '---') . "</td>
+                            <td>
+                                <a href='edit_employee.php?id={$row['id']}' class='btn btn-edit'>تعديل</a>
+                                <a href='transfer_employee.php?id={$row['id']}' class='btn btn-transfer'>نقل</a>
+                                <a href='delete_employee.php?id={$row['id']}' class='btn btn-delete' onclick='return confirm(\"حذف الموظف نهائياً؟\")'>حذف</a>
                             </td>
                           </tr>";
                     $sn++;
                 }
             } else {
-                echo "<tr><td colspan='5'>لا يوجد موظفين حالياً. أضف موظفك الأول!</td></tr>";
+                echo "<tr><td colspan='5'>القاعدة فارغة.. ابدأ بإضافة موظفيك!</td></tr>";
             }
             ?>
         </tbody>
