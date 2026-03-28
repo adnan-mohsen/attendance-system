@@ -1,4 +1,3 @@
-<?php include 'check_login.php'; ?>
 <?php include 'db_config.php'; ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
