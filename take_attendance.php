@@ -1,7 +1,5 @@
-<nav style="background: #343a40; padding: 15px; text-align: center; border-radius: 8px; margin-bottom: 20px;">
-    <a href="employees.php" style="color: white; text-decoration: none; margin: 0 15px; font-weight: bold;">👥 الموظفين</a>
-    <a href="take_attendance.php" style="color: white; text-decoration: none; margin: 0 15px; font-weight: bold;">📝 تسجيل الحضور</a>
-    <a href="view_attendance.php" style="color: white; text-decoration: none; margin: 0 15px; font-weight: bold;">📊 التقارير</a>
+<nav
+<?php include 'header.php'; ?>
 </nav>
 <?php include 'db_config.php'; ?>
 <!DOCTYPE html>
@@ -25,26 +23,30 @@
     
     <form action="save_attendance.php" method="POST">
         <table>
-            <thead>
-                <tr>
-                    <th>اسم الموظف</th>
-                    <th>حاضر</th>
-                    <th>غائب</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $result = mysqli_query($conn, "SELECT * FROM employees");
-                while($row = mysqli_fetch_assoc($result)) {
-                    echo "<tr>
-                            <td>{$row['name']}</td>
-                            <td><input type='radio' name='status[{$row['id']}]' value='present' required></td>
-                            <td><input type='radio' name='status[{$row['id']}]' value='absent'></td>
-                          </tr>";
-                }
-                ?>
-            </tbody>
-        </table>
+    <thead>
+        <tr>
+            <th>اسم الموظف</th>
+            <th>الإجراء</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+        $res = mysqli_query($conn, "SELECT * FROM employees");
+        while($row = mysqli_fetch_assoc($res)) {
+            echo "<tr>
+                    <td>{$row['name']}</td>
+                    <td>
+                        <form action='save_attendance.php' method='POST' style='display:inline;'>
+                            <input type='hidden' name='employee_id' value='{$row['id']}'>
+                            <button type='submit' name='status' value='حاضر' class='btn-present'>حاضر ✅</button>
+                            <button type='submit' name='status' value='غائب' class='btn-absent'>غائب ❌</button>
+                        </form>
+                    </td>
+                  </tr>";
+        }
+        ?>
+    </tbody>
+</table>
         <button type="submit" class="btn-save">حفظ سجل الحضور</button>
     </form>
     <p style="text-align: center;"><a href="employees.php">العودة لإدارة الموظفين</a></p>
