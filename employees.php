@@ -56,10 +56,7 @@
 <body>
 
 <nav>
-    <a href="employees.php">👥 إدارة الموظفين</a>
-    <a href="manage_branches.php">🏢 إدارة الفروع</a>
-    <a href="take_attendance.php">📝 تسجيل الحضور</a>
-    <a href="view_attendance.php">📊 التقارير العامة</a>
+   <?php include 'header.php'; ?>
 </nav>
 
 <div class="container">
@@ -93,7 +90,7 @@
             <tr>
                 <th>#</th>
                 <th>اسم الموظف (اضغط للملف)</th>
-                <th>نظام الراتب</th>
+                <th>نظام التعاقد</th>
                 <th>الفرع</th>
                 <th>إدارة البيانات</th>
             </tr>
