@@ -1,7 +1,5 @@
-<nav style="background: #343a40; padding: 15px; text-align: center; border-radius: 8px; margin-bottom: 20px;">
-    <a href="employees.php" style="color: white; text-decoration: none; margin: 0 15px; font-weight: bold;">👥 الموظفين</a>
-    <a href="take_attendance.php" style="color: white; text-decoration: none; margin: 0 15px; font-weight: bold;">📝 تسجيل الحضور</a>
-    <a href="view_attendance.php" style="color: white; text-decoration: none; margin: 0 15px; font-weight: bold;">📊 التقارير</a>
+<nav 
+<?php include 'header.php'; ?>
 </nav>
 <div style="text-align: left; margin-bottom: 10px;">
     <button onclick="window.print()" class="btn-filter" style="background-color: #28a745;">🖨️ طباعة التقرير (PDF)</button>
@@ -120,3 +118,31 @@
 
 </body>
 </html>
+<?php
+// جلب تاريخ اليوم أو التاريخ المحدد في التصفية
+$date_to_filter = isset($_GET['date']) ? $_GET['date'] : date('Y-m-d');
+
+// حساب إجمالي الحاضرين
+$present_query = "SELECT COUNT(*) as total FROM attendance_records WHERE attendance_date = '$date_to_filter' AND status = 'حاضر'";
+$present_result = mysqli_query($conn, $present_query);
+$present_data = mysqli_fetch_assoc($present_result);
+$total_present = $present_data['total'];
+
+// حساب إجمالي الغائبين
+$absent_query = "SELECT COUNT(*) as total FROM attendance_records WHERE attendance_date = '$date_to_filter' AND status = 'غائب'";
+$absent_result = mysqli_query($conn, $absent_query);
+$absent_data = mysqli_fetch_assoc($absent_result);
+$total_absent = $absent_data['total'];
+?>
+
+<div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 30px;">
+    <div style="background: white; padding: 20px; border-radius: 15px; border-top: 5px solid #28a745; box-shadow: 0 5px 15px rgba(0,0,0,0.05); width: 200px; text-align: center;">
+        <h4 style="color: #666; margin: 0;">إجمالي الحاضرين</h4>
+        <h2 style="color: #28a745; font-size: 40px; margin: 10px 0;"><?php echo $total_present; ?></h2>
+    </div>
+    
+    <div style="background: white; padding: 20px; border-radius: 15px; border-top: 5px solid #dc3545; box-shadow: 0 5px 15px rgba(0,0,0,0.05); width: 200px; text-align: center;">
+        <h4 style="color: #666; margin: 0;">إجمالي الغائبين</h4>
+        <h2 style="color: #dc3545; font-size: 40px; margin: 10px 0;"><?php echo $total_absent; ?></h2>
+    </div>
+</div>
