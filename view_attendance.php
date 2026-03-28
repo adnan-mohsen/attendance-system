@@ -26,7 +26,12 @@
         .status-present { background-color: #d4edda; color: #155724; border-radius: 4px; padding: 4px 8px; font-weight: bold; }
         .status-absent { background-color: #f8d7da; color: #721c24; border-radius: 4px; padding: 4px 8px; font-weight: bold; }
         .btn-filter { background-color: #007bff; color: white; border: none; padding: 8px 20px; border-radius: 5px; cursor: pointer; }
-    </style>
+    @media print {
+    .filter-box, .back-link, .btn-filter, h2 { display: none; }
+    .container { box-shadow: none; border: none; width: 100%; margin: 0; padding: 0; }
+    table { width: 100%; border: 1px solid #000; }
+}
+  </style>      
 </head>
 <body>
 
