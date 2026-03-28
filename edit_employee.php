@@ -35,7 +35,7 @@ if(isset($_GET['id'])) {
         <label>الاسم الحالي:</label>
         <input type="text" name="name" value="<?php echo $emp['name']; ?>" required>
         
-        <label>نظام الراتب:</label>
+        <label>نظام التعاقد:</label>
         <select name="salary_type">
             <option value="salary_only" <?php if($emp['salary_type'] == 'salary_only') echo 'selected'; ?>>راتب أساسي</option>
             <option value="salary_bonus" <?php if($emp['salary_type'] == 'salary_bonus') echo 'selected'; ?>>راتب + بونص</option>
